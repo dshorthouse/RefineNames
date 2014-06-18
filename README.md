@@ -13,7 +13,7 @@ Example use can be found in index.php
 Copyright
 ---------
 
-    Copyright (c) 2014 David P. Shorthouse
+    Copyright (c) Université de Montréal
 
     Released under MIT License
 
