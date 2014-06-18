@@ -139,10 +139,13 @@ class Resolver extends Reconciliation
     );
     
     private $_batch_size;
+    private $_hit_limit;
 
-    function __construct($batch_size = 50)
+    function __construct($batch_size = 50, $hit_limit = 5)
     {
         $this->_batch_size = $batch_size;
+        $this->_hit_limit = $hit_limit;
+
         $this->dataSource = "";
         $this->name = 'Global Names Resolver';
 
@@ -196,7 +199,7 @@ class Resolver extends Reconciliation
                 if (!isset($data->results)) {
                     unset($this->result->{$data->supplied_id}->result);
                 } else {
-                    $n = min($limit, count($data->results));
+                    $n = min($this->_hit_limit, count($data->results));
                     for ($i = 0; $i < $n; $i++) {
                         $hit = new \stdClass;
                         $hit->match = ($data->results == 1);

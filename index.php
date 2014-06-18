@@ -10,6 +10,6 @@ spl_autoload_register(function ($class) {
     }
 });
 
-//Example call to a service 
-$init = new Resolver;
+//where 50 = batch size of names for POST requests and 5 = number of possible name matches to return per name
+$init = new Resolver(50, 5);
 $init->call($_REQUEST);

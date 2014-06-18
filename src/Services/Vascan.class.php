@@ -47,10 +47,13 @@ use RefineNames\ReconciliationService as Reconciliation;
 class Vascan extends Reconciliation
 {
     private $_batch_size;
+    private $_hit_limit;
 
-    function __construct($batch_size = 50)
+    function __construct($batch_size = 50, $hit_limit = 5)
     {
         $this->_batch_size = $batch_size;
+        $this->_hit_limit = $hit_limit;
+
         $this->name             = 'Vascular Plants of Canada';
         $this->identifierSpace  = 'http://data.canadensys.net/vascan/';
 
@@ -84,7 +87,6 @@ class Vascan extends Reconciliation
         }
 
         $url = 'http://data.canadensys.net/vascan/api/0.1/search.json';
-        $limit = 15;
 
         $chunks = array_chunk($names, $this->_batch_size);
         foreach ($chunks as $chunk) {
@@ -95,7 +97,7 @@ class Vascan extends Reconciliation
                     if ($results->numMatches == 0) {
                         unset($this->result->{$results->localIdentifier}->result);
                     } else {
-                        $n = min($limit, $results->numMatches);
+                        $n = min($this->_hit_limit, $results->numMatches);
                         for ($i = 0; $i < $n; $i++) {
                             $hit = new \stdClass;
                             $hit->match = ($results->numMatches == 1);
