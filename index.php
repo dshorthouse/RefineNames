@@ -11,5 +11,10 @@ spl_autoload_register(function ($class) {
 });
 
 //where 50 = batch size of names for POST requests and 5 = number of possible name matches to return per name
+//Using the Resolver.class.php service
 $init = new Resolver(50, 5);
 $init->call($_REQUEST);
+
+//Using the Vascan.class.php service
+//$init = new Vascan(50, 5);
+//$init->call($_REQUEST);

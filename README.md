@@ -10,6 +10,12 @@ Code was developed in part by [Roderic Page](https://github.com/rdmpage/phyloinf
 
 Example use can be found in index.php
 
+Requirements
+------------
+
+- PHP >= 5.5
+- php5-curl
+
 Copyright
 ---------
 
